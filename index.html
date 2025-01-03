@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WGPU Drawing Program</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="error" class="hidden">WebGPU is required for this example</h1>
+    <canvas id="canvas"></canvas>
+    <script>
+        function resizeCanvas() {
+            const canvas = document.getElementById("canvas");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        window.addEventListener("load", resizeCanvas);
+    </script>
+    <script type="module">
+        import("./pkg/drawing.js").then(async module => {
+            await module.default();
+            module.run_web();
+        });
+    </script>
+</body>
+</html>
